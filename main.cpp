@@ -11,10 +11,9 @@ int main(void) {
     HeapTree T(k) ;
     cout << "input : 20,30,90,80,10,40,60,70,50,0 "<<endl;
     T.add( 0 );//ivector[0];
-    T.insert(20);T.insert(30);T.insert(90);T.insert(80);T.insert(10);
-    T.insert(40);T.insert(60);T.insert(70);T.insert(50);T.insert(0);
+    T.insert(0);T.insert(10);T.insert(20);T.insert(30);T.insert(40);
+    T.insert(50);T.insert(60);T.insert(70);T.insert(80);T.insert(90);
     
-    T.minOfChildren(10);
     //T.downHeapBubbling( 3 );   
     T.print();
     for( int i =0 ; i <3 ; i++ ){
@@ -40,5 +39,4 @@ int main(void) {
     system("PAUSE");
     return 0; 
 }
-
 

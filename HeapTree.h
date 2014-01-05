@@ -32,41 +32,18 @@ HeapTree::HeapTree( int k ):k_ary(k){
     vector<int> ivector;
 }
 
+int HeapTree::min(){
+    return ivector[1] ;    
+}     
+
 int HeapTree::size(){
     return  ivector.size()-1;   
 }    
 
 void HeapTree::add( int keyValue ){
     ivector.push_back( keyValue );
-    }
+}
     
-void HeapTree::insert( int keyValue ){
-    
-    add( keyValue );
-    upHeapBubbling( size() );    
-}
-// 
-void HeapTree::remove( int keyValue ){
-    int index =0;
-    if( keyValue == ivector[1] )
-        index = 1;
-    else{    
-        for ( int i = 1 ; i <=size() ; i++ ){
-            if(  keyValue == ivector[i] )
-                index = i;  
-        }
-        if( index ==0)
-            cout << "can't find this key!";  
-    }       
-    swap( ivector[index],ivector[size()] );
-    ivector.pop_back();
-    downHeapBubbling( index );                      
-}
-
-void HeapTree::removeMin(){
-    remove( ivector[1] );    
-}
- 
 void HeapTree::upHeapBubbling( int index ){
     
     int parentIndex = (int)floor((index-2)/k_ary+1);
@@ -76,11 +53,45 @@ void HeapTree::upHeapBubbling( int index ){
             upHeapBubbling( parentIndex );
     }      
 }
-// 
+
+void HeapTree::insert( int keyValue ){
+    
+    add( keyValue );
+    upHeapBubbling( size() );    
+}
+ 
+void HeapTree::removeMin(){
+    remove( ivector[1] );    
+}
+
+
+// // //
+void HeapTree::remove( int keyValue ){
+   int i =1;
+   int firstSize = size();
+   for( i = 1 ; i<= firstSize ; i++ ){
+        if( ivector[ i ] == keyValue ){
+            swap( ivector[ i ] , ivector [ size()] );
+            ivector.pop_back();
+            downHeapBubbling( i );   
+            i =  firstSize+1;//ªý¤îÄ~Äò¶]°j°é 
+        }
+        else 
+            continue;
+    }
+    cout<<"\n";
+     for (vector<int>::iterator it = ivector.begin()+1 ; it != ivector.end(); ++it)
+        cout << setw(4) << *it;
+    cout <<"\n*****************************************";
+    cout<<"\n";
+}
+
+// // //
 void HeapTree::downHeapBubbling( int  index ){
-    if( minOfChildren( index ) <= size()){// ensure it's in vector
+    //cout << "hello";
+    if( minOfChildren( index ) <= size() && minOfChildren( index )>0){// ensure it's in vector
         //cout << minOfChildren( index );
-        swap( ivector[ index ],ivector[ minOfChildren ( index ) ] );
+        swap( ivector[ index ],ivector[ minOfChildren ( index ) ] );//
         downHeapBubbling ( minOfChildren  ( index )  );  
     }  
 }
@@ -94,35 +105,38 @@ int HeapTree::minOfChildren( int index ){
         if( indexOfChildren[ count ] > size()){
            // cout << "\n\nindex " << index <<" only has " << count <<" child/children" ;
             numOfChildren = count ;
+            break;
         }         
         else
             count++;   
     }
     if( numOfChildren ==0 ){
         //cout << "\nindex " << index <<" has no child ." ;
-        return ivector.size();
+        return -1 ;
     }        
     else if ( numOfChildren==1 ){
         return  size();
     }
     else{
-        int indexOfMin ;
-        int min =ivector[ indexOfChildren[0] ];
+        int indexOfMin =0 ;
+        int min = ivector[ indexOfChildren[0] ];
         for( int i =1 ; i < numOfChildren ; i++ ) {
             if( ivector[ indexOfChildren[i] ] < min )
                 min = ivector [indexOfChildren[i]];
         }   
+        //cout <<"\nminOfChildren :" <<min <<"\n";
         for( int j=0; j< size() ; j++){
-            ivector[ j ] ==min ;
-            indexOfMin = j;
+            if( ivector[ j ] ==min){ 
+                indexOfMin = j;
+                break;
+            }
+            else
+                continue;    
         }
         return indexOfMin;
     }    
 }
 
-int HeapTree::min(){
-    return ivector[1] ;    
-}     
 void HeapTree::print(){
     
     vector<int> Print = ivector;
