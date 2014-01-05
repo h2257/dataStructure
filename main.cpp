@@ -8,13 +8,14 @@ int main(void) {
 
     cout << "choose degree k( >=2):" ;
     cin >> k ;
-    HeapTree T(k,10) ;
-    cout << "input : 20,30,90,80,0,40,60,70,50,10 "<<endl;
-    T.keyArray[1]=20;T.keyArray[2]=30;T.keyArray[3]=90;T.keyArray[4]=80;
-    T.keyArray[5]=0 ;T.keyArray[6]=40;T.keyArray[7]=60;T.keyArray[8]=70;
-    T.keyArray[9]=50;T.keyArray[10]=10;
-    T.heapSort();
-   
+    HeapTree T(k) ;
+    cout << "input : 20,30,90,80,10,40,60,70,50,0 "<<endl;
+    T.add( 0 );//ivector[0];
+    T.insert(20);T.insert(30);T.insert(90);T.insert(80);T.insert(10);
+    T.insert(40);T.insert(60);T.insert(70);T.insert(50);T.insert(0);
+    
+    T.minOfChildren(10);
+    //T.downHeapBubbling( 3 );   
     T.print();
     for( int i =0 ; i <3 ; i++ ){
         int c =1 ;
@@ -22,14 +23,13 @@ int main(void) {
         cout << "\nchoose 1( for insert ) or 2 ( for remove ) :" ;
         cin >> c ;
         if ( c == 1){
-            cout << "key :" ;
+            cout << "inserted key :" ;
             cin >> keyValue ;
-            T.insert(keyValue);
-            
+            T.insert(keyValue);            
             T.print();    
         }   
         else if( c == 2 ){
-            cout << "key :" ;
+            cout << "remove key :" ;
             cin >> keyValue ;
             T.remove(keyValue); 
             T.print();    

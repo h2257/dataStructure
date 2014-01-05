@@ -1,7 +1,7 @@
 [Project]
 FileName=HW5.dev
 Name=±M®×1
-UnitCount=3
+UnitCount=2
 Type=1
 Ver=1
 ObjFiles=
@@ -59,16 +59,6 @@ AutoIncBuildNr=0
 
 [Unit2]
 FileName=HeapTree.h
-CompileCpp=1
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit3]
-FileName=K_aryTree.h
 CompileCpp=1
 Folder=
 Compile=1
